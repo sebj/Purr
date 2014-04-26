@@ -8,7 +8,8 @@ static TextLayer *text_layer;
 static AppTimer *timer;
 
 static const VibePattern purr_pattern = {
-  .durations = (uint32_t []) {100, 75, 200},
+  //On, off, on
+  .durations = (uint32_t []) {100, 100, 200},
   .num_segments = 3
 };
 
