@@ -6,7 +6,6 @@
 static Window *window;
 static TextLayer *text_layer;
 static AppTimer *timer;
-bool hasIntro = true;
 
 static const VibePattern purr_pattern = {
   .durations = (uint32_t []) {200, 50, 100, 50, 200},
@@ -23,7 +22,7 @@ static void hide_intro(void *data) {
   text_layer_destroy(text_layer);
 }
 
-int main(void) {
+void init() {
   window = window_create();
   window_stack_push(window, true);
 
@@ -37,6 +36,20 @@ int main(void) {
 
   timer = app_timer_register(PURR_TIMEOUT, purr, NULL);
   app_timer_register(PURR_INTRO_TIMEOUT, hide_intro, NULL);
+}
 
+void deinit() {
+  if (text_layer != NULL) {
+    text_layer_destroy(text_layer);
+  }
+
+  app_timer_cancel(timer);
+
+  window_destroy(window);
+}
+
+int main(void) {
+  init();
   app_event_loop();
+  deinit();
 }
