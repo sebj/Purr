@@ -24,6 +24,7 @@ static void hide_intro(void *data) {
 
 void init() {
   window = window_create();
+  window_set_background_color(window, GColorBlack);
   window_stack_push(window, true);
 
   Layer *window_layer = window_get_root_layer(window);
@@ -31,6 +32,8 @@ void init() {
   text_layer = text_layer_create((GRect){ .origin = { 0, 50 }, .size = bounds.size });
   text_layer_set_text(text_layer, "Purr");
   text_layer_set_font(text_layer, fonts_get_system_font(FONT_KEY_BITHAM_42_BOLD));
+  text_layer_set_background_color(text_layer, GColorClear);
+  text_layer_set_text_color(text_layer, GColorWhite);
   text_layer_set_text_alignment(text_layer, GTextAlignmentCenter);
   layer_add_child(window_layer, text_layer_get_layer(text_layer));
 
@@ -39,11 +42,11 @@ void init() {
 }
 
 void deinit() {
+  app_timer_cancel(timer);
+  
   if (text_layer != NULL) {
     text_layer_destroy(text_layer);
   }
-
-  app_timer_cancel(timer);
 
   window_destroy(window);
 }
