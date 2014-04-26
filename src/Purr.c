@@ -30,7 +30,7 @@ void init() {
 
   Layer *window_layer = window_get_root_layer(window);
   GRect bounds = layer_get_frame(window_layer);
-  text_layer = text_layer_create((GRect){ .origin = { 0, 50 }, .size = bounds.size });
+  text_layer = text_layer_create((GRect){ .origin = { 0, 56 }, .size = bounds.size });
   text_layer_set_text(text_layer, "Purr");
   text_layer_set_font(text_layer, fonts_get_system_font(FONT_KEY_BITHAM_42_BOLD));
   text_layer_set_background_color(text_layer, GColorClear);
